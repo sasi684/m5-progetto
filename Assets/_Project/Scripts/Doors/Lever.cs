@@ -5,9 +5,11 @@ public class Lever : MonoBehaviour
 {
 
     [SerializeField] private UnityEvent _onLeverActivate;
+    [SerializeField] private UnityEvent<bool> _onPlayerInRange;
 
     private Animator _animator;
     private bool _isPlayerInRange;
+    private bool _isPulled;
 
     private PlayerInput _input;
 
@@ -19,19 +21,20 @@ public class Lever : MonoBehaviour
 
     private void Update()
     {
-        if (_isPlayerInRange && _input.ActivateLever)
+        if (_isPlayerInRange && _input.ActivateLever && !_isPulled)
         {
-            Debug.Log("OK");
             _animator.SetTrigger("Activate");
             _onLeverActivate?.Invoke();
+            _isPulled = true;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !_isPulled)
         {
             _isPlayerInRange = true;
+            _onPlayerInRange?.Invoke(_isPlayerInRange);
         }
     }
 
@@ -40,6 +43,7 @@ public class Lever : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _isPlayerInRange = false;
+            _onPlayerInRange?.Invoke(_isPlayerInRange);
         }
     }
 
