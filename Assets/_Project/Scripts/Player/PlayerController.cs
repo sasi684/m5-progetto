@@ -4,8 +4,8 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float _maxTravelDistance = 6f;
-    
+    [SerializeField] private float _maxTravelDistance;
+
     private Camera _camera;
 
     private PlayerInput _input;
