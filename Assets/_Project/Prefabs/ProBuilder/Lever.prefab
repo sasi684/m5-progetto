@@ -249,7 +249,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 145
+  m_VersionIndex: 181
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -302,7 +302,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 7ca7b17c2d90591489c0f3eb4fc0aad8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -445,6 +445,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onLeverActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Door, Assembly-CSharp
+        m_MethodName: OpenDoor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _onPlayerInRange:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1191556767796268747
@@ -34467,7 +34482,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 18
+  m_VersionIndex: 54
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -34522,7 +34537,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 7ca7b17c2d90591489c0f3eb4fc0aad8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -34822,19 +34837,11 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 74
+  m_VersionIndex: 69
   m_IsSelectable: 1
-  m_SelectedFaces: 00000000
-  m_SelectedEdges:
-  - a: 0
-    b: 1
-  - a: 2
-    b: 0
-  - a: 1
-    b: 3
-  - a: 3
-    b: 2
-  m_SelectedVertices: 00000000010000000200000003000000
+  m_SelectedFaces: 
+  m_SelectedEdges: []
+  m_SelectedVertices: 
 --- !u!114 &8901858470007908702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34883,7 +34890,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 7ca7b17c2d90591489c0f3eb4fc0aad8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

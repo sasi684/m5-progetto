@@ -10,13 +10,17 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected ENEMY_STATE _currentState;
     [SerializeField] protected float _chaseUpdateTime;
     [SerializeField] protected float _waitTime;
+    [SerializeField] protected float _chaseToPatrolTime;
 
     protected Coroutine _waitingCoroutine;
     protected bool _isWaiting;
+    protected Coroutine _chasingCoroutine;
 
     protected NavMeshAgent _agent;
 
-    protected float _lastChaseUpdate;
+    protected FieldOfView _fieldOfView;
+    protected float _lastPlayerInSight;
+    protected LineRenderer _lineRenderer;
 
     protected abstract void IdleUpdate();
     protected abstract void PatrolUpdate();

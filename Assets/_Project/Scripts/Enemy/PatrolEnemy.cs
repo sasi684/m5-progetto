@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,6 +13,10 @@ public class PatrolEnemy : Enemy
         _waypointsManager = FindAnyObjectByType<WaypointsManager>();
 
         _agent = GetComponent<NavMeshAgent>();
+
+        _fieldOfView = GetComponent<FieldOfView>();
+
+        _lineRenderer = GetComponentInChildren<LineRenderer>();
     }
 
     private void Start()
@@ -49,7 +52,12 @@ public class PatrolEnemy : Enemy
 
     protected override void PatrolUpdate()
     {
-        // TODO: SE VEDE IL PLAYER, LO INSEGUE (FOV DA IMPLEMENTARE)
+        if (_fieldOfView.IsPlayerInSight())
+        {
+            _lastPlayerInSight = Time.time;
+            ChangeState(ENEMY_STATE.CHASE);
+            return;
+        }
 
         if (_waypoints == null || _isWaiting)
             return;
@@ -60,14 +68,17 @@ public class PatrolEnemy : Enemy
 
     protected override void ChaseUpdate()
     {
-        // TODO: SE IL PLAYER NON SI VEDE, DOPO UN PO' TORNA IN IDLE
-
-        if(Time.time - _lastChaseUpdate > _chaseUpdateTime)
+        if (Time.time - _lastPlayerInSight > _chaseToPatrolTime)
         {
-            // TODO: SEGUE IL PLAYER
-
-            _lastChaseUpdate = Time.time;
+            ChangeState(ENEMY_STATE.PATROL);
+            return;
         }
+
+        if (_fieldOfView.IsPlayerInSight())
+            _lastPlayerInSight = Time.time;
+
+        if (_chasingCoroutine == null)
+            _chasingCoroutine = StartCoroutine(ChasingCoroutine());
     }
     #endregion
 
@@ -77,7 +88,16 @@ public class PatrolEnemy : Enemy
 
     protected override void OnEnterPatrol()
     {
+        if(_chasingCoroutine != null)
+        {
+            StopCoroutine(_chasingCoroutine);
+            _chasingCoroutine = null;
+        }
+
         _agent.SetDestination(_waypoints[_index].position);
+
+        _lineRenderer.startColor = Color.green;
+        _lineRenderer.endColor = Color.green;
     }
     protected override void OnExitPatrol() { }
 
@@ -92,7 +112,9 @@ public class PatrolEnemy : Enemy
             _waitingCoroutine = null;
             _isWaiting = false;
         }
-        _lastChaseUpdate = 0f;
+
+        _lineRenderer.startColor = Color.red;
+        _lineRenderer.endColor = Color.red;
     }
     protected override void OnExitChase() { }
     #endregion
@@ -109,5 +131,14 @@ public class PatrolEnemy : Enemy
         _agent.isStopped = false;
         _isWaiting = false;
         _waitingCoroutine = null;
+    }
+
+    private IEnumerator ChasingCoroutine()
+    {
+        while (true)
+        {
+            _agent.SetDestination(_fieldOfView.Player.position);
+            yield return new WaitForSeconds(_chaseUpdateTime);
+        }
     }
 }
