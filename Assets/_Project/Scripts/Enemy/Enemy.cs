@@ -5,15 +5,11 @@ public enum ENEMY_STATE { IDLE, PATROL, CHASE }
 
 public abstract class Enemy : MonoBehaviour
 {
-    
-    [SerializeField] protected int _agentId;
     [SerializeField] protected ENEMY_STATE _currentState;
     [SerializeField] protected float _chaseUpdateTime;
     [SerializeField] protected float _waitTime;
     [SerializeField] protected float _chaseToPatrolTime;
 
-    protected Coroutine _waitingCoroutine;
-    protected bool _isWaiting;
     protected Coroutine _chasingCoroutine;
 
     protected NavMeshAgent _agent;

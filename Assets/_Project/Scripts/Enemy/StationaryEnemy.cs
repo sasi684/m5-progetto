@@ -1,22 +1,17 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PatrolEnemy : Enemy
+public class StationaryEnemy : Enemy
 {
-    [SerializeField] private int _agentId;
+    [SerializeField] private float _rotationAngle;
 
-    private Coroutine _waitingCoroutine;
-    private bool _isWaiting;
-
-    private WaypointsManager _waypointsManager;
-    private Transform[] _waypoints;
-    private int _index = 0;
+    private Vector3 _startPosition;
+    private Coroutine _rotateCoroutine;
 
     private void Awake()
     {
-        _waypointsManager = FindAnyObjectByType<WaypointsManager>();
-
         _agent = GetComponent<NavMeshAgent>();
 
         _fieldOfView = GetComponent<FieldOfView>();
@@ -26,11 +21,8 @@ public class PatrolEnemy : Enemy
 
     private void Start()
     {
+        _startPosition = transform.position;
         _currentState = ENEMY_STATE.IDLE;
-
-        _waypoints = _waypointsManager.GetPath(_agentId);
-        if(_waypoints != null)
-            _agent.SetDestination(_waypoints[_index].position);
     }
 
     private void Update()
@@ -49,7 +41,6 @@ public class PatrolEnemy : Enemy
         }
     }
 
-    #region States Updates
     protected override void IdleUpdate()
     {
         ChangeState(ENEMY_STATE.PATROL);
@@ -64,11 +55,8 @@ public class PatrolEnemy : Enemy
             return;
         }
 
-        if (_waypoints == null || _isWaiting)
-            return;
-
-        if(!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance)
-            _waitingCoroutine = StartCoroutine(WaitingCoroutine());
+        if (!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance && _rotateCoroutine == null)
+            _rotateCoroutine = StartCoroutine(RotateCoroutine());
     }
 
     protected override void ChaseUpdate()
@@ -85,57 +73,46 @@ public class PatrolEnemy : Enemy
         if (_chasingCoroutine == null)
             _chasingCoroutine = StartCoroutine(ChasingCoroutine());
     }
-    #endregion
 
-    #region OnEnter/OnExit States
     protected override void OnEnterIdle() { }
     protected override void OnExitIdle() { }
 
     protected override void OnEnterPatrol()
     {
-        if(_chasingCoroutine != null)
+        if (_chasingCoroutine != null)
         {
             StopCoroutine(_chasingCoroutine);
             _chasingCoroutine = null;
         }
 
-        _agent.SetDestination(_waypoints[_index].position);
+        _agent.SetDestination(_startPosition);
 
         _lineRenderer.startColor = Color.green;
         _lineRenderer.endColor = Color.green;
     }
     protected override void OnExitPatrol() { }
 
-    protected override void OnEnterChase() 
+    protected override void OnEnterChase()
     {
-        if(_agent.isStopped)
-            _agent.isStopped = false;
-
-        if(_waitingCoroutine != null)
+        if(_rotateCoroutine != null)
         {
-            StopCoroutine(_waitingCoroutine);
-            _waitingCoroutine = null;
-            _isWaiting = false;
+            StopCoroutine(_rotateCoroutine);
+            _rotateCoroutine = null;
         }
 
         _lineRenderer.startColor = Color.red;
         _lineRenderer.endColor = Color.red;
     }
     protected override void OnExitChase() { }
-    #endregion
 
-    private IEnumerator WaitingCoroutine()
+    private IEnumerator RotateCoroutine()
     {
-        _isWaiting = true;
-        _agent.isStopped = true;
-        yield return new WaitForSeconds(_waitTime);
-
-        _index = (_index + 1) % _waypoints.Length;
-        _agent.SetDestination(_waypoints[_index].position);
-
-        _agent.isStopped = false;
-        _isWaiting = false;
-        _waitingCoroutine = null;
+        while (true)
+        {
+            Vector3 deltaAngle = Vector3.up * Time.deltaTime * _rotationAngle;
+            transform.Rotate(deltaAngle);
+            yield return null;
+        }
     }
 
     private IEnumerator ChasingCoroutine()
