@@ -17,9 +17,10 @@ public class LineRendererHandler : MonoBehaviour
 
     private IEnumerator EvaluateFieldOfView()
     {
+        WaitForSeconds waitTime = new WaitForSeconds(_interval);
         while (true)
         {
-            yield return new WaitForSeconds(_interval);
+            yield return waitTime;
 
             ElaborateFieldOfView(_subdivisions);
         }

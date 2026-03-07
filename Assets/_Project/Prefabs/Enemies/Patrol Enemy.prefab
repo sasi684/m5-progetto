@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 805931140546609729}
   - component: {fileID: 6827738185960901831}
   - component: {fileID: 864798859511763922}
+  - component: {fileID: 3452455736180730368}
   m_Layer: 7
   m_Name: Patrol Enemy
   m_TagString: Untagged
@@ -71,13 +72,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f98890e4e607743a4f8f9f192a2d8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agentId: 0
   _currentState: 0
   _chaseUpdateTime: 0.1
   _waitTime: 1.5
   _chaseToPatrolTime: 3
-  _patrolColor: {r: 0.004378005, g: 0.7264151, b: 0, a: 0}
-  _chaseColor: {r: 0.6698113, g: 0, b: 0, a: 0}
+  _agentId: 0
 --- !u!114 &864798859511763922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +95,29 @@ MonoBehaviour:
   _whatIsObstacle:
     serializedVersion: 2
     m_Bits: 115
+--- !u!136 &3452455736180730368
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2404272974443203682}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &3459407780831610462
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,11 +162,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf18e932418d6f4199eb1152bc09914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _subdivisions: 30
+  _subdivisions: 24
   _whatIsObstacle:
     serializedVersion: 2
     m_Bits: 115
-  _interval: 0.01
+  _interval: 0.05
   _lineRenderer: {fileID: 7949443551955331113}
   _fieldOfView: {fileID: 864798859511763922}
 --- !u!1 &6937574326676577437

@@ -272,11 +272,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf18e932418d6f4199eb1152bc09914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _subdivisions: 30
+  _subdivisions: 24
   _whatIsObstacle:
     serializedVersion: 2
     m_Bits: 115
-  _interval: 0.01
+  _interval: 0.05
   _lineRenderer: {fileID: 5190220625402322169}
   _fieldOfView: {fileID: 8997678835556550798}
 --- !u!1 &5443912536379554332

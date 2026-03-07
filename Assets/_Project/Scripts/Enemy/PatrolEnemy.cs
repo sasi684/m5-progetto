@@ -140,10 +140,11 @@ public class PatrolEnemy : Enemy
 
     private IEnumerator ChasingCoroutine()
     {
+        var waitTime = new WaitForSeconds(_chaseUpdateTime);
         while (true)
         {
             _agent.SetDestination(_fieldOfView.Player.position);
-            yield return new WaitForSeconds(_chaseUpdateTime);
+            yield return waitTime;
         }
     }
 }

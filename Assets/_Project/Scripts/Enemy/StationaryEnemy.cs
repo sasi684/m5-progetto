@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -117,10 +116,11 @@ public class StationaryEnemy : Enemy
 
     private IEnumerator ChasingCoroutine()
     {
+        var waitTime = new WaitForSeconds(_chaseUpdateTime);
         while (true)
         {
             _agent.SetDestination(_fieldOfView.Player.position);
-            yield return new WaitForSeconds(_chaseUpdateTime);
+            yield return waitTime;
         }
     }
 }
