@@ -40,6 +40,7 @@ public class StationaryEnemy : Enemy
         }
     }
 
+    #region States Updates
     protected override void IdleUpdate()
     {
         ChangeState(ENEMY_STATE.PATROL);
@@ -72,7 +73,9 @@ public class StationaryEnemy : Enemy
         if (_chasingCoroutine == null)
             _chasingCoroutine = StartCoroutine(ChasingCoroutine());
     }
+    #endregion
 
+    #region OnEnter/OnExit States
     protected override void OnEnterIdle() { }
     protected override void OnExitIdle() { }
 
@@ -103,6 +106,7 @@ public class StationaryEnemy : Enemy
         _lineRenderer.endColor = Color.red;
     }
     protected override void OnExitChase() { }
+    #endregion
 
     private IEnumerator RotateCoroutine()
     {
