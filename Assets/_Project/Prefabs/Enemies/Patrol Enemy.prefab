@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 805931140546609729}
   - component: {fileID: 6827738185960901831}
   - component: {fileID: 864798859511763922}
-  - component: {fileID: 3452455736180730368}
+  - component: {fileID: 4420865715570804825}
   m_Layer: 7
   m_Name: Patrol Enemy
   m_TagString: Untagged
@@ -95,7 +95,7 @@ MonoBehaviour:
   _whatIsObstacle:
     serializedVersion: 2
     m_Bits: 115
---- !u!136 &3452455736180730368
+--- !u!136 &4420865715570804825
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,7 +110,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -314,7 +314,6 @@ GameObject:
   - component: {fileID: 3884900619183056137}
   - component: {fileID: 3339783816593759102}
   - component: {fileID: 6069985762968894919}
-  - component: {fileID: 5553025707591113986}
   m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
@@ -387,26 +386,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5553025707591113986
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8880232056119730157}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}

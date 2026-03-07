@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -62,19 +63,21 @@ public class ScreenFader : MonoBehaviour
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private float _fadeTime = 5f;
 
-    public void StartFadeToOpaque(CanvasGroup canvas)
+    public void StartFadeToOpaque(Action onFadeComplete = null)
     {
+        StopAllCoroutines();
         gameObject.SetActive(true);
-        StartCoroutine(FadeCoroutine(0f, 1f, _fadeTime));
+        StartCoroutine(FadeCoroutine(0f, 1f, _fadeTime, onFadeComplete));
     }
 
-    public void StartFadeToTransparent(CanvasGroup canvas)
+    public void StartFadeToTransparent(Action onFadeComplete = null)
     {
+        StopAllCoroutines();
         gameObject.SetActive(true);
-        StartCoroutine(FadeCoroutine(1f, 0f, _fadeTime));
+        StartCoroutine(FadeCoroutine(1f, 0f, _fadeTime, onFadeComplete));
     }
 
-    private IEnumerator FadeCoroutine(float startValue, float endValue, float duration)
+    private IEnumerator FadeCoroutine(float startValue, float endValue, float duration, Action callback)
     {
         _canvasGroup.alpha = startValue;
         float timer = 0f;
@@ -91,5 +94,7 @@ public class ScreenFader : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+
+        callback?.Invoke();
     }
 }

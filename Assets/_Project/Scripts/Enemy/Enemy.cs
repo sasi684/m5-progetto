@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public enum ENEMY_STATE { IDLE, PATROL, CHASE }
 
@@ -68,6 +69,20 @@ public abstract class Enemy : MonoBehaviour
         OnExitState(_currentState);
         _currentState = newState;
         OnEnterState(newState);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent<PlayerController>(out var player))
+        {
+            ScreenFader.Instance.StartFadeToOpaque(GameOver);
+        }
+    }
+
+    private void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
+        ScreenFader.Instance.StartFadeToTransparent();
     }
 
 }

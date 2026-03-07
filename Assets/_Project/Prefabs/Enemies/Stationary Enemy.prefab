@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4337493866395676836}
   - component: {fileID: 8997678835556550798}
   - component: {fileID: 2168640370315291546}
-  m_Layer: 0
+  - component: {fileID: 6200942208264704357}
+  m_Layer: 7
   m_Name: Stationary Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,6 +95,29 @@ MonoBehaviour:
   _waitTime: 1.5
   _chaseToPatrolTime: 3
   _rotationAngle: 45
+--- !u!136 &6200942208264704357
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045788397962395461}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &3233165246165015916
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7116462442658684233}
   - component: {fileID: 5190220625402322169}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4229585485287233654}
   - component: {fileID: 757911517752335703}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: View Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,8 +314,7 @@ GameObject:
   - component: {fileID: 974864332386744800}
   - component: {fileID: 5977006272595129809}
   - component: {fileID: 2643136393330602183}
-  - component: {fileID: 9180648029773310588}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -363,26 +386,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &9180648029773310588
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5443912536379554332}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
