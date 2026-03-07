@@ -10,9 +10,9 @@ public class Door : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    public void OpenDoor()
+    public void OpenDoor() // This method is called by an event
     {
-        _animator.SetTrigger("Open");
+        _animator.SetTrigger("Open"); // Start the door opening animation
     }
 
 }

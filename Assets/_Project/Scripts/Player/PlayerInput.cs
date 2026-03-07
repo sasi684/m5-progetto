@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
-
+    // This component is used to capture player's inupt and store it in these variables
     private bool _moveToPoint;
     private bool _cameraRotateLeft;
     private bool _cameraRotateRight;

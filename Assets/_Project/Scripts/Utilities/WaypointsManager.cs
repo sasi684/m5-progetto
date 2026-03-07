@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class WaypointsManager : MonoBehaviour
 {
-    [SerializeField] private Transform[] _path0 = new Transform[4];
-    [SerializeField] private Transform[] _path1 = new Transform[4];
-    [SerializeField] private Transform[] _path2 = new Transform[4];
+    [SerializeField] private Transform[] _path0 = new Transform[4]; // Path for enemy with agentId 0
+    [SerializeField] private Transform[] _path1 = new Transform[4]; // Path for enemy with agentId 1
+    [SerializeField] private Transform[] _path2 = new Transform[4]; // Path for enemy with agentId 2
 
     public Transform[] GetPath(int agentId)
     {
-        switch (agentId)
+        switch (agentId) // Return a path base on the agentId
         {
             case 0:
                 return _path0;

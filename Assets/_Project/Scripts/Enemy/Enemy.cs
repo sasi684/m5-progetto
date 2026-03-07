@@ -2,14 +2,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
-public enum ENEMY_STATE { IDLE, PATROL, CHASE }
+public enum ENEMY_STATE { IDLE, PATROL, CHASE } // All possible states for enemies
 
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] protected ENEMY_STATE _currentState;
-    [SerializeField] protected float _chaseUpdateTime;
-    [SerializeField] protected float _waitTime;
-    [SerializeField] protected float _chaseToPatrolTime;
+    [SerializeField] protected float _chaseUpdateTime; // Time to update the path in chase state
+    [SerializeField] protected float _waitTime; // Time to set next destination in Patrol state
+    [SerializeField] protected float _chaseToPatrolTime; // Time to go back to Patrol state from Chase
 
     protected Coroutine _chasingCoroutine;
 
@@ -32,6 +32,7 @@ public abstract class Enemy : MonoBehaviour
     protected abstract void OnEnterChase();
     protected abstract void OnExitChase();
 
+    // Generic on enter state method
     protected void OnEnterState(ENEMY_STATE state)
     {
         switch (state)
@@ -48,6 +49,7 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    // Generic on exit state method
     protected void OnExitState(ENEMY_STATE state)
     {
         switch (state)
@@ -64,6 +66,7 @@ public abstract class Enemy : MonoBehaviour
         }
     }
 
+    // Generic change state method
     protected void ChangeState(ENEMY_STATE newState)
     {
         OnExitState(_currentState);
@@ -71,6 +74,7 @@ public abstract class Enemy : MonoBehaviour
         OnEnterState(newState);
     }
 
+    // If the enemy touches the player, then transition to the game over scene
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<PlayerController>(out var player))
